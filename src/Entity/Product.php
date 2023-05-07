@@ -39,7 +39,7 @@ class Product
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Brand $brand_id = null;
+    private ?Brand $brand = null;
 
     public function getId(): ?int
     {
@@ -130,14 +130,14 @@ class Product
         return $this;
     }
 
-    public function getBrandId(): ?Brand
+    public function getBrand(): ?Brand
     {
-        return $this->brand_id;
+        return $this->brand;
     }
 
-    public function setBrandId(?Brand $brand_id): self
+    public function setBrandId(?Brand $brand): self
     {
-        $this->brand_id = $brand_id;
+        $this->brand_id = $brand;
 
         return $this;
     }
