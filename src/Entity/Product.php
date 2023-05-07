@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\AccessType("PROPERTY")]
 class Product
 {
     #[ORM\Id]
@@ -25,7 +26,7 @@ class Product
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $enabled = null;
 
     #[ORM\Column(length: 70)]
@@ -135,11 +136,16 @@ class Product
         return $this->brand;
     }
 
-    public function setBrandId(?Brand $brand): self
+    public function setBrand(?Brand $brand): self
     {
-        $this->brand_id = $brand;
+        $this->brand = $brand;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getBrand();
     }
 
 }

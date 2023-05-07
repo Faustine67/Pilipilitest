@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un produit{% endblock %}
+
+{% block body %}
+
+{{ form_start(formAddProduct) }}
+
+<div class="mb-3">
+    {{ form_label(formAddProduct.name, 'Name', {'label_attr': {'class': 'd-block'}}) }}
+    {{ form_widget(formAddProduct.name) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(formAddProduct.description, 'Description', {'label_attr': {'class': 'd-block'}}) }}
+    {{ form_widget(formAddProduct.description) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(formAddProduct.brand, 'Brand', {'label_attr': {'class': 'd-block'}}) }}
+    {{ form_widget(formAddProduct.brand) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(formAddProduct.price, 'Price', {'label_attr': {'class': 'd-block'}}) }}
+    {{ form_widget(formAddProduct.price) }}
+</div>
+
+{{ form_widget(formAddProduct.submit) }}
+
+{{ form_end(formAddProduct) }}
+
+
+{% endblock %}
+
