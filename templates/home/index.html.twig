@@ -5,10 +5,14 @@
 {% block body %}
      <h1>Liste des produits disponibles </h1>
 
+<div class="container">
      {% for prod in products %}
-     {{prod.name}} <br>
-     {{prod.description}}<br>
-     {{prod.slug}}<br>
-     {{prod.getCreatedAt()| date('d/m/Y')}}<br><br>
+    <div  class="container-item">
+        {{prod.name}} <br>
+        {{prod.description}}<br>
+         {{prod.slug}}<br>
+        {{prod.getCreatedAt()| date('d/m/Y')}}<br><br>
+    </div>
       {% endfor %}
+</div>
 {% endblock %}

@@ -5,37 +5,34 @@
 {% block body %}
 
 
-<div class="example-wrapper">
     <h1>Page Produits </h1>
 
-    <table class="product-list">
+    <table class="table">
         <thead>
             <tr>
-                <th> #</th>
-                <th> Nom</th>
-                <th>Description</th>
-                <th>Marque</th>
-                <th>Slug</th>
-                <th>Date de création</th>
-                <th>Editer</th>
-
+                <th scope="col"> #</th>
+                <th scope="col"> Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
         {% for prod in products %}
            <tr>
-              <td>{{prod.id}}</td>
-              <td>{{prod.name}}</td>
-              <td>{{prod.description}}</td>
-              <td>{{prod.brand|length}}</td>
-              <td>{{prod.slug}}</td>
-              <td>{{prod.getCreatedAt()| date('d/m/Y')}}</td>
-              <td><a class="editButton" href="{{ path('edit_product', {'id': prod.id }) }}"><i class="fa-solid fa-pen-to-square"></i> Éditer</a></td>
+              <td scope="row">{{prod.id}}</td>
+              <td scope="row">{{prod.name}}</td>
+              <td scope="row">{{prod.description}}</td>
+              <td scope="row">{{prod.brand.id|length}}</td>
+              <td scope="row">{{prod.slug}}</td>
+              <td scope="row">{{prod.getCreatedAt()| date('d/m/Y')}}</td>
+              <td scope="row"><a class="editButton" href="{{ path('edit_product', {'id': prod.id }) }}"><i class="fa-solid fa-pen-to-square"></i> Éditer</a></td>
 
             </tr>
         {% endfor %}
         </tbody>
     </table><br>
 
-</div>
 {% endblock %}

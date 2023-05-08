@@ -31,3 +31,60 @@
         opacity: 0;
     }
 }
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #f5f6f7;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+  }
+  
+  .header {
+    text-align: center;
+    text-transform: uppercase;
+    padding: 32px;
+    background-color: #f3c10e;
+    color: #d9e70d;
+    border-bottom: 4px solid #fdb347;
+  }
+
+.container {
+    
+    padding: 20px 40px;
+    position:relative;
+    display:inline-block;
+    border-color: black;
+    max-width: 540px;
+    --bs-gutter-x: 1.5rem;
+    width: 100%;
+    max-width: 720px;
+    padding: 20px 40px;
+  }
+
+  .container::after {
+    content: "";
+    width: 350px;
+  }
+
+  .container-item{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    border:1px solid darkslategray;
+    padding: 20px 20px 20px 20px;
+    border-radius: 15px;
+  }
+  .form{
+    display: block;
+    /* margin-left: 50px; */
+    margin: auto;
+
+  }
+
