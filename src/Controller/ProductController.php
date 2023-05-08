@@ -40,7 +40,7 @@ class ProductController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         // j'affiche tous les produits
-        $products= $doctrine->getRepository(Product::class)->findAll();
+        $products= $doctrine->getRepository(Product::class)->findBy(['enabled'=>1]);
         return $this->render('product/index.html.twig', [
             'products' => $products,
         ]);
