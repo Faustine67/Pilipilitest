@@ -4,6 +4,13 @@
 
 {% block body %}
 
+    
+{% if edit %}
+<h1>Modifier le produit</h1>
+{% else %}
+<h1>Créer le produit</h1>
+{% endif %}
+
       {{ form_start(formAddProduct) }}
 
 <div class="mb-3">

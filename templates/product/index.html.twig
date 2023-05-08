@@ -17,6 +17,8 @@
                 <th>Marque</th>
                 <th>Slug</th>
                 <th>Date de création</th>
+                <th>Editer</th>
+
             </tr>
         </thead>
         <tbody>
@@ -28,6 +30,7 @@
               <td>{{prod.brand|length}}</td>
               <td>{{prod.slug}}</td>
               <td>{{prod.getCreatedAt()| date('d/m/Y')}}</td>
+              <td><a class="editButton" href="{{ path('edit_product', {'id': prod.id }) }}"><i class="fa-solid fa-pen-to-square"></i> Éditer</a></td>
 
             </tr>
         {% endfor %}

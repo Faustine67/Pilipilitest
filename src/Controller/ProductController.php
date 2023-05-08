@@ -14,13 +14,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
+    #[Route('product/edit', name:'edit_product')]
     #[Route('/product/create', name: 'create_product')]
-    public function create(EntityManagerInterface $entityManager, Product $product=null, Request $request, MailerService $mailerService ):Response
+    public function create(EntityManagerInterface $entityManager, Product $product=null, Request $request, MailerService $mailerService): Response
     {
-        //Creation du formulaire
+        if(!$product){
+            $product= new Product();}
+            //Creation du formulaire
 
-        $form= $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+            $form= $this->createForm(ProductType::class, $product);
+            $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
@@ -34,11 +37,24 @@ class ProductController extends AbstractController
             $mailerService->sendProductActivationEmail($product);
             return $this->redirectToRoute('app_product');
         }
+    
+        if($product){
+            $idProduct = $product->getId();
+        }
 
-        return $this->render('product/create.html.twig', [
-           'formAddProduct' => $form->createView(),
-        ]);
+            // View qui affiche le formuaire d'ajout
+            return $this->render('product/create.html.twig', [
+            'formAddProduct' => $form->createView(),
+            // Si y'a Id c'est qu'on modifie (sinon renvoie false, = création), pour le titre de la page
+            'edit' => $product->getId(),
+            'ProductId' => $idProduct
+            ]);
+
     }
+
+        // return $this->render('product/create.html.twig', [
+        //    'formAddProduct' => $form->createView(),
+        // ]);
 
     #[Route('/product', name: 'app_product')]
     public function index(ManagerRegistry $doctrine): Response
