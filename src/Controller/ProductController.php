@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     #[Route('/product/create', name: 'create_product')]
-    public function create(EntityManagerInterface $entityManager, Product $product=null, Request $request): Response
+    public function create(EntityManagerInterface $entityManager, Product $product=null, Request $request, MailerService $mailerService ):Response
     {
         //Creation du formulaire
 
@@ -26,8 +27,11 @@ class ProductController extends AbstractController
             $product= $form->getData();
             $entityManager->persist($product);
             $entityManager->flush();
-
+            
+            //Ajout du message Flash
             $this->addFlash('success',"Produit ajouté");
+            //Ajout de l'email
+            $mailerService->sendProductActivationEmail($product);
             return $this->redirectToRoute('app_product');
         }
 
@@ -44,5 +48,18 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
         ]);
+    }
+
+    #[Route('/product/activate/{id}', name: 'activate_product')]
+    public function activate(Product $product, EntityManagerInterface $entityManager, MailerService $mailerService
+    ): Response
+    {
+        $product->setEnabled(true);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Le produit a été activé");
+        $mailerService->sendProductActivatedEmail($product);
+
+        return $this->redirectToRoute('app_product');
     }
 }
