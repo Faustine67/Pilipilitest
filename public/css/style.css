@@ -1,0 +1,33 @@
+.alertFlash{
+    position: fixed;
+    bottom: 45px;
+    right: 10px;
+    width: 300px;
+    font-size: 0.60em;
+    max-width: 300px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    opacity: 0;
+    animation: fadeInFlash 0.7s 0.1s forwards ease, fadeOutFlash 0.8s 2.5s forwards ease;
+}
+
+@keyframes fadeInFlash {
+    from {
+        transform: translateY(-60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-0px);
+        opacity: 1;
+    }
+}
+@keyframes fadeOutFlash {
+    from {
+        transform: translateY(-0px);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(60px);
+        opacity: 0;
+    }
+}
