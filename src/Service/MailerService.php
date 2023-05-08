@@ -1,13 +1,12 @@
 <?php
 
-namespace Service;
+namespace App\Service;
 
-use App\Service;
 use App\Entity\Product;
-use Service\MailerService;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class MailerService
 {
@@ -23,11 +22,21 @@ class MailerService
     public function sendMail($subject, $to, $body)
     {
         $email = (new Email())
-            ->from('faustine@example.com')
+            ->from('michelfaustine@gmail.com')
             ->to($to)
             ->subject($subject)
             ->html($body);
 
         $this->mailer->send($email);
     }
+
+    public function sendProductActivationEmail(Product $product)
+{
+    // Construire le message email
+    $subject = 'Activation de produit';
+    $to = 'michelfaustine@gmail.com';
+    $body = 'Le produit ' . $product->getName() . ' a été activé.';
+    $this->sendMail($subject, $to, $body);
+}
+
 }
