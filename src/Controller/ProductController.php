@@ -39,7 +39,7 @@ class ProductController extends AbstractController
     #[Route('/product', name: 'app_product')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        // j'affiche tous les produits
+        // j'affiche uniquement les produits activés
         $products= $doctrine->getRepository(Product::class)->findBy(['enabled'=>1]);
         return $this->render('product/index.html.twig', [
             'products' => $products,
